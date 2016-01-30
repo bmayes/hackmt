@@ -1,0 +1,58 @@
+body {
+    overflow: hidden;
+}
+.contain {
+    width: 100% !important; margin:0; padding: 0; height: 100%; overflow: hidden;
+}
+.container-fluid {
+    padding: 0;
+}
+h1 {
+    color: #5e5e5e; font-family: 'Jura', sans-serif; font-size: 4em; margin-left: .5em; float: left;
+}
+.top {
+    width: 100%; margin: 0 !important;
+}
+.bottom {
+    background-color: #5e5e5e; width: 100%; margin: 0 !important;
+}
+.tri1, .tri2, .tri3, .tri4 {
+    height: 0;
+    width: 0;
+    border-radius: 30px;
+    transition: margin .3s, border-bottom-color .3s, border-right-color .3s, border-width .1s, top .1s;
+    padding: 0;
+    border: 11em solid transparent;
+    border-right-color: #5e5e5e;
+    border-bottom-color: #5e5e5e;
+}
+.em {
+    border-width: 11em; display: none;
+}
+
+.tri1 {
+    position: relative;
+    margin: auto;
+}
+.tri2 {
+    position: relative; border: 150px  solid transparent; border-bottom-color: #5e5e5e; border-left-color: #5e5e5e; height:0;width:0; border-radius: 30px; top: -2.4em; left: 44%; float: left; transition: margin .3s, border-bottom-color .3s, border-left-color .3s;
+}
+.tri3 {
+    position: relative; border: 150px  solid transparent; border-top-color: white; border-right-color: #fff; height:0;width:0; border-radius: 30px; top: 1.7em; left: 41%; float: left; transition: margin .3s, border-top-color .3s, border-right-color .3s;
+}
+.tri4 {
+    position: relative; border: 150px  solid transparent; border-top-color: #fff; border-left-color: #fff; height:0;width:0; border-radius: 30px; top: 1.7em; left: 44%; float: left; transition: margin .3s, border-top-color .3s, border-left-color .3s;
+}
+
+/*.tri1:hover {*/
+/*border-bottom-color: #c6c6c6; border-right-color: #c6c6c6; margin: -20px 20px 0 -20px; transition: margin .3s, border-bottom-color .3s, border-right-color .3s;*/
+/*}*/
+/*.tri2:hover {*/
+/*border-bottom-color: #c6c6c6; border-left-color: #c6c6c6; margin: -20px -20px 0 20px; transition: margin .3s, border-bottom-color .3s, border-left-color .3s;*/
+/*}*/
+/*.tri3:hover {*/
+/*border-top-color: #c6c6c6; border-right-color: #c6c6c6; margin: 20px 20px 0 -20px; transition: margin .3s, border-top-color .3s, border-right-color .3s;*/
+/*}*/
+/*.tri4:hover {*/
+/*border-top-color: #c6c6c6; border-left-color: #c6c6c6; margin: 20px -20px 0 20px; transition: margin .3s, border-top-color .3s, border-left-color .3s;*/
+/*}*/
