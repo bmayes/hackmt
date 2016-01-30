@@ -5,6 +5,8 @@ from songshift import app, db, theLoginMgr
 
 from flask.ext.login import login_required, current_user, login_user, logout_user
 
+import soundcloud
+
 
 # @theLoginMgr.user_loader
 # def load_user(userid):
@@ -15,8 +17,14 @@ from flask.ext.login import login_required, current_user, login_user, logout_use
 ------------------------------------------------------- """
 @app.route('/')
 def index():
+
+    # client id provided by soundcloud
+    SC_CLIENT_ID = '8173b8c45f9a7ed733c87095efde5b73'
+
     navbar = {}
 
+
+    client = soundcloud.Client(client_id=SC_CLIENT_ID)
 
     # call to the API and get some song data
     # song_title = thing()
