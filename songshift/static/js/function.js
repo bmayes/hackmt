@@ -18,19 +18,16 @@ $(document).ready(function () {
         stop: function( event, ui ) {
             SWIPE_THRESH = 200;
             if( ui.position['left'] > SWIPE_THRESH){
-                //$(this).trigger('swiperight');
+                $('#vrotate').trigger('swiperight');
+                //$(this).hide("slide", { direction: "right" }, 100);
             }
             if( ui.position['left'] < -SWIPE_THRESH){
-                //$(this).trigger('swipeleft')
+                $('#vrotate').trigger('swipeleft');
+                //$(this).hide("slide", { direction: "left" }, 100);
             }
         }
     });
 
-    $( ".vinyl").on('mouseup', function() {
-        $(this).animate({
-                    opacity:0
-                }, 100);
-    });
 
     $('.circle1').click(function AnimateRotate(angle) {
         // caching the object for performance reasons
@@ -83,7 +80,7 @@ $(document).ready(function () {
     getNewSong('');
 
 
-    $('.vinyl img').on('swipeleft', function (e) {
+    $('#vrotate').on('swipeleft', function (e) {
         console.log('dislike');
         data = {
             song_id: currentSongID,
@@ -91,7 +88,7 @@ $(document).ready(function () {
         };
         vote(data)
     });
-    $('.vinyl img').on('swiperight', function (e) {
+    $('#vrotate').on('swiperight', function (e) {
         console.log('like');
         data = {
             song_id: currentSongID,
@@ -151,7 +148,7 @@ $(document).ready(function () {
     function vote(data) {
         if (currentSongID == null) return;
 
-
+        showNewVinyl();
 
         getNewSong(currentNextHref);
 
@@ -164,6 +161,12 @@ $(document).ready(function () {
             cache: false,
             datatype: 'JSON'
         });
+    }
+
+    function showNewVinyl() {
+        $('.vinyl img').remove();
+        var rand = Math.floor((Math.random() * 3) + 1);
+        $('.vinyl').append('<img src="../static/img/vinyl' + rand + '.png" id="vrotate" />' );
     }
 
 });
