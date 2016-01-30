@@ -16,5 +16,15 @@ from flask.ext.login import login_required, current_user, login_user, logout_use
 @app.route('/')
 def index():
     navbar = {}
-    body = {}
+
+
+    # call to the API and get some song data
+    # song_title = thing()
+    song_title = "Got the hello --------------"
+
+    body = {
+        "song_title" : song_title,
+        "artist" : "Jay Z"
+    }
+
     return render_template('index.html', navbar=navbar, body=body)
