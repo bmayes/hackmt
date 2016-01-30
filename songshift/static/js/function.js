@@ -55,14 +55,14 @@ $(document).ready(function () {
 
     $('.vinyl').on('swipeleft', function (e) {
         data = {
-            song_id: 24234,
+            song_id: currentSongID,
             like: false
         };
         vote(data)
     });
     $('.vinyl').on('swiperight', function (e) {
         data = {
-            song_id: 24235,
+            song_id: currentSongID,
             like: true
         };
         vote(data)
@@ -71,7 +71,7 @@ $(document).ready(function () {
     $('#like').on('click', function () {
         console.log("like");
         data = {
-            song_id: 24235,
+            song_id: currentSongID,
             like: true
         };
         vote(data)
@@ -82,7 +82,7 @@ $(document).ready(function () {
         console.log("dislike");
         //$(this).hide();
         data = {
-            song_id: 24235,
+            song_id: currentSongID,
             like: false
         };
         vote(data)
@@ -105,7 +105,7 @@ $(document).ready(function () {
         console.log(data);
         // update html from here
         // also save song id
-        // currentSongID = data.song_id
+         currentSongID = data.song_id
     }
 
     function vote(data) {
@@ -113,15 +113,11 @@ $(document).ready(function () {
         getNewSong();
 
         $.ajax({
-            type: "POST",
-            url: "/newsong",
+            type: "GET",
+            url: "/vote",
             data: data,
             cache: false,
-            datatype: 'JSON',
-            contenttype: 'JSON',
-            success: function (data1) {
-                console.log(data1);
-            }
+            datatype: 'JSON'
         });
     }
 

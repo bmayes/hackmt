@@ -51,3 +51,5 @@ theLoginMgr.login_view = 'login'
 # import models.KnownSenders
 # create the needed circular include.
 import songshift.router
+
+db.create_all()
