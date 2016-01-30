@@ -9,6 +9,7 @@ from flask.ext.login import login_required, current_user, login_user, logout_use
 
 # import soundcloud
 import random
+import json
 
 
 # @theLoginMgr.user_loader
@@ -26,11 +27,17 @@ def index():
 
 
     track = getNewTrack()
+    # body = {
+    #     "song_title" : track.title,
+    #     "artist" : track.user['username'],
+    #     "artwork_url" : track.artwork_url,
+    #     "song_id" : track.id,
+    #     "stream_url" : track.stream_url
+    # }
     body = {
-        "song_title" : track.title,
-        "artist" : track.user['username'],
-        "artwork_url" : track.artwork_url,
-        "song_id" : track.id
+        "song_title" : "",
+         "artist" : "",
+         "artwork_url" : ""
     }
 
     return render_template('index.html', navbar=navbar, body=body)
@@ -47,9 +54,6 @@ def getNewTrack():
 
     client = soundcloud.Client(client_id=SC_CLIENT_ID)
 
-    # fetch random track
-    # track_id = random.randint(100,1000)
-    # track = client.get('/tracks/%d' % track_id)
 
     tracks = client.get('/tracks',
                         limit=SEARCH_AHEAD,
@@ -59,4 +63,21 @@ def getNewTrack():
     rand_num = random.randint(0, SEARCH_AHEAD-1)
     rand_track = tracks[rand_num]
 
+    if not rand_track:
+        getNewTrack()
+
     return rand_track
+
+@app.route('/newsong', methods=['GET'])
+def loadSong():
+
+    track = getNewTrack()
+    track_dict = {
+        "song_title" : track.title,
+        "artist" : track.user['username'],
+        "artwork_url" : track.artwork_url,
+        "song_id" : track.id,
+        "stream_url" : track.stream_url
+    }
+
+    return json.dumps(track_dict)
