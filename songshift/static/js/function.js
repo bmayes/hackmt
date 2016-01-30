@@ -5,7 +5,6 @@
 $(document).ready(function() {
 
     $('.circle1').click(function AnimateRotate(angle) {
-        document.getElementById('audio').play();
         // caching the object for performance reasons
         var $elem = $('#vrotate');
         angle = 0;
