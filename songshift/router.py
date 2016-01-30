@@ -3,6 +3,8 @@ from flask import render_template, send_from_directory, redirect, url_for, flash
 from functools import wraps
 from songshift import app, db, theLoginMgr
 
+from songshift.models.songs import Song
+
 from flask.ext.login import login_required, current_user, login_user, logout_user
 
 
