@@ -97,3 +97,6 @@ div {
     top: 251px;
     z-index: 10;
 }
+.ui-loader {
+    display: none;
+}

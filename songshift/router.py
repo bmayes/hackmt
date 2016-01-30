@@ -11,7 +11,7 @@ import soundcloud
 import random
 import json
 from models.songs import Song
-import datetime
+from datetime import date
 
 # @theLoginMgr.user_loader
 # def load_user(userid):
@@ -45,57 +45,80 @@ def index():
     return render_template('index.html', navbar=navbar, body=body)
 
 
-def getNewTrack():
+def getNewTrack(next_href='/tracks'):
     # client id provided by soundcloud
+    if next_href == '':
+        next_href = '/tracks'
 
-
-    SEARCH_AHEAD = None  # num of items to preload
-    suggestion_threshold = 80  # percent of loads that are liked genres
+    SEARCH_AHEAD = 100  # num of items to preload
+    suggestion_threshold = 60  # percent of loads that are liked genres
 
     valid_track_types = 'original, remix, recording, live'
     users_tags = "rock, electronic"
 
     rand = random.randint(0, 100);
-    if rand <= suggestion_threshold:  # differs from user's likes
-        tracks = client.get('/tracks',
+    if rand > suggestion_threshold:  # differs from user's likes
+        tracks = client.get(next_href,
                             limit=SEARCH_AHEAD,
-                            order='playback_count',
-                            types=valid_track_types)
-    else:
-        tracks = client.get('/tracks',
-                            limit=SEARCH_AHEAD,
-                            order='playback_count',
+                            order='created_at',
                             types=valid_track_types,
-                            genre=users_tags)
+                            linked_partitioning=1)
+    else:
+        tracks = client.get(next_href,
+                            limit=SEARCH_AHEAD,
+                            order='created_at',
+                            types=valid_track_types,
+                            genre=users_tags,
+                            linked_partitioning=1)
 
-    rand_track = random.choice(tracks)
+    need_track = True
+    while need_track:
+        try:
+            tracks = client.get(tracks.next_href,
+                                limit=SEARCH_AHEAD,
+                                order='created_at',
+                                types=valid_track_types,
+                                genre=users_tags,
+                                linked_partitioning=1)
+            valid_tracks = []
+            for track in tracks.collection:
+                 if validTrack(track):
+                     print track.title
+                     valid_tracks.append(track)
+            if valid_tracks:
+                track = random.choice(valid_tracks)
+                need_track = False
 
-    if not rand_track:
+        except Exception:
+            pass
+
+
+    if not track:
         getNewTrack()
 
-    if not validTrack(rand_track):
-        getNewTrack()
+    # if not validTrack(rand_track):
+    #     getNewTrack()
 
-    return rand_track
+    return track, tracks.next_href
+
 
 
 def validTrack(track):
-
-    tag_count = len(track.tag_list.split(' '))
-    if tag_count <= 1: return False
-    print tag_count
-    # if int(track.playback_count) < 50: return False
-    # if track.streamable == 'false': return False
-    # if int(track.release_year) <= (int(datetime.date.year) - 5): return False
-    # duration must be longer than minute but shorter than 6 minutes
-    # if track.duration > 1000 & track.duration <= 6000: return False
+    # tag_count = len(track.tag_list.split(' '))
+    # if tag_count <= 1: return False
+    # print tag_count
+    if int(track.playback_count) < 50 or track.streamable == 'false':
+        return False
 
     return True
 
+
 @app.route('/newsong', methods=['GET'])
 def loadSong():
-    track = getNewTrack()
+
+    track, next_href = getNewTrack(request.args['next_href'])
     track_dict = {
+        "next_href" : next_href,
         "song_title": track.title,
         "artist": track.user['username'],
         "artwork_url": track.artwork_url,
@@ -109,7 +132,6 @@ def loadSong():
 
 @app.route('/vote', methods=['GET'])
 def voteSong():
-
     vote = None
     if request.args['like'] == 'true':
         vote = 1
