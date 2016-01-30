@@ -13,7 +13,19 @@ $(document).ready(function () {
         $('head').append('<link rel="stylesheet" type="text/css" href="../static/css/style_mobile.css"/>');
     }
 
-    $( ".vinyl img" ).draggable({ revert: true });
+    $( ".vinyl img" ).draggable({
+        revert: true,
+        stop: function( event, ui ) {
+            SWIPE_THRESH = 200;
+            if( ui.position['left'] > SWIPE_THRESH){
+                $(this).trigger('swiperight');
+                $(this).draggable('option', 'revert', false);
+            }
+            if( ui.position['left'] < -SWIPE_THRESH){
+                $(this).trigger('swipeleft')
+            }
+        }
+    });
 
     $('.circle1').click(function AnimateRotate(angle) {
         // caching the object for performance reasons
@@ -66,7 +78,7 @@ $(document).ready(function () {
     getNewSong('');
 
 
-    $('.vinyl').on('swipeleft', function (e) {
+    $('.vinyl img').on('swipeleft', function (e) {
         console.log('dislike');
         data = {
             song_id: currentSongID,
@@ -74,7 +86,7 @@ $(document).ready(function () {
         };
         vote(data)
     });
-    $('.vinyl').on('swiperight', function (e) {
+    $('.vinyl img').on('swiperight', function (e) {
         console.log('like');
         data = {
             song_id: currentSongID,
@@ -132,8 +144,9 @@ $(document).ready(function () {
     }
 
     function vote(data) {
-
         if (currentSongID == null) return;
+
+
 
         getNewSong(currentNextHref);
 
