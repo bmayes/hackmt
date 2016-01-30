@@ -49,36 +49,32 @@ $(document).ready(function () {
         });
     });
 
-    // $('.vinyl').on('swipe', function() {
-    //   $(this).hide();
-    //})
+    getNewSong();
+    var currentSongID;
 
-    //$('.needle').on('click', function() {
-    //  $(this).hide();
-    //})
 
-     $('.vinyl').on('swipeleft', function(e){
-    data = {
-        song_id: 24234,
-        like: false
-    };
-    vote(data)
+    $('.vinyl').on('swipeleft', function (e) {
+        data = {
+            song_id: 24234,
+            like: false
+        };
+        vote(data)
     });
-    $('.vinyl').on('swiperight', function(e){
-      data = {
-        song_id: 24235,
-        like: true
-    };
-    vote(data)
+    $('.vinyl').on('swiperight', function (e) {
+        data = {
+            song_id: 24235,
+            like: true
+        };
+        vote(data)
     });
 
     $('#like').on('click', function () {
         console.log("like");
         data = {
-        song_id: 24235,
-        like: true
-    };
-    vote(data)
+            song_id: 24235,
+            like: true
+        };
+        vote(data)
         //$(this).hide();
     });
 
@@ -86,22 +82,47 @@ $(document).ready(function () {
         console.log("dislike");
         //$(this).hide();
         data = {
-        song_id: 24235,
-        like: false
-    };
-    vote(data)
+            song_id: 24235,
+            like: false
+        };
+        vote(data)
     });
 
+    function getNewSong() {
+        $.ajax({
+            type: "GET",
+            url: "/newsong",
+            cache: false,
+            datatype: 'JSON',
+            success: function (data) {
+                handleNewSong(data);
+            }
+        });
+    }
+
+    function handleNewSong(data) {
+        data = JSON.parse(data);
+        console.log(data);
+        // update html from here
+        // also save song id
+        // currentSongID = data.song_id
+    }
+
     function vote(data) {
+
+        getNewSong();
+
         $.ajax({
             type: "POST",
             url: "/newsong",
             data: data,
             cache: false,
+            datatype: 'JSON',
+            contenttype: 'JSON',
             success: function (data1) {
                 console.log(data1);
             }
         });
     }
 
-    });
+});
