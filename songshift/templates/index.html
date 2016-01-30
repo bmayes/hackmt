@@ -56,12 +56,11 @@
 
             <div class="details">
                 <div class="albumimg">
-                    <img src="../static/img/gottahaveit.jpg">
+                    <img src="{{ body['artwork_url'] }}">
                 </div>
                 <div class="artist text-center">
                     <p>{{ body['song_title'] }}</p>
                     <p>by <strong>{{ body['artist'] }}</strong></p>
-                    <p>on The Throne</p>
                 </div>
 
             </div>
@@ -84,6 +83,9 @@
 
 <script src="../static/js/function.js" type="text/javascript"></script>
 
+<script>
+
+</script>
 
 
 </body>
