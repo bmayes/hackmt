@@ -13,24 +13,24 @@ div {
 }
 .home-banner {
     height: 2.5em;  box-shadow: -5px 2px 10px gray, 5px 2px 10px gray; position: absolute; z-index: 3; width: 100%; border-bottom: 1px solid gray;
-    background: #cfe6e9; /* Old browsers */
-    background: -moz-linear-gradient(top,  #cfe6e9 0%, #3ab9c2 0%, #61c2c7 4%, #aadade 17%, #42d6d6 59%, #4cf0e5 71%, #3ac2c2 84%, #267e8c 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cfe6e9), color-stop(0%,#3ab9c2), color-stop(4%,#61c2c7), color-stop(17%,#aadade), color-stop(59%,#42d6d6), color-stop(71%,#4cf0e5), color-stop(84%,#3ac2c2), color-stop(100%,#267e8c)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #cfe6e9 0%,#3ab9c2 0%,#61c2c7 4%,#aadade 17%,#42d6d6 59%,#4cf0e5 71%,#3ac2c2 84%,#267e8c 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #cfe6e9 0%,#3ab9c2 0%,#61c2c7 4%,#aadade 17%,#42d6d6 59%,#4cf0e5 71%,#3ac2c2 84%,#267e8c 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #cfe6e9 0%,#3ab9c2 0%,#61c2c7 4%,#aadade 17%,#42d6d6 59%,#4cf0e5 71%,#3ac2c2 84%,#267e8c 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #cfe6e9 0%,#3ab9c2 0%,#61c2c7 4%,#aadade 17%,#42d6d6 59%,#4cf0e5 71%,#3ac2c2 84%,#267e8c 100%); /* W3C */
+    background: linear-gradient(to bottom,  #FFFFFF 0%,#FFFFFF 0%,#FFFFFF 4%,#FFFFFF 17%,#FFFFFF 59%,#FFFFFF 71%,#FFFFFF 84%,#FFFFFF 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cfe6e9', endColorstr='#267e8c',GradientType=0 ); /* IE6-9 */
-
+    color: #E60909;
 }
 .app {
     overflow: hidden;
 }
 .settings {
-    margin: 4px 10px 5px 10px; float: left;
+    margin: 4px 10px 5px 10px;
+    float: left;
 }
 .title {
-    text-align: center; font-size: 2em; font-weight: 600; width: 72%; margin-top: -3px; float: left;
+    text-align: center;
+    font-size: 2em;
+    font-weight: 600;
+    width: 72%;
+    margin-top: -3px;
+    float: left;
 }
 .user {
     float: right; margin: 4px 10px 5px 10px;

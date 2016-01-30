@@ -106,6 +106,10 @@ $(document).ready(function () {
         // update html from here
         // also save song id
          currentSongID = data.song_id
+        $('#Artist').html(data.artist);
+        $('#songTitle').html(data.song_title);
+        $('.albumimg img').attr('src', data.artwork_url);
+
     }
 
     function vote(data) {
@@ -120,5 +124,7 @@ $(document).ready(function () {
             datatype: 'JSON'
         });
     }
+
+
 
 });
