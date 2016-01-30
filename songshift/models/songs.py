@@ -4,8 +4,8 @@ class Song(db.Model):
 
     __tablename__ = "songs"
     id = db.Column(db.Integer, primary_key=True)
+    songid = db.Column(db.Integer)
     affinity = db.Column(db.Boolean)
     genre = db.Column(db.String(150))
-    tags = db.Column(db.String(250))
     def __repr__(self):
-        return '<User %r>' % self.genre
+        return '<Song %r %r>' % (self.songid, self.affinity)

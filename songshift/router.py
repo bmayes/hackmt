@@ -7,7 +7,7 @@ from songshift.models.songs import Song
 
 from flask.ext.login import login_required, current_user, login_user, logout_user
 
-import soundcloud
+# import soundcloud
 import random
 
 
