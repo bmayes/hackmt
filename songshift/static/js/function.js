@@ -13,6 +13,8 @@ $(document).ready(function () {
         $('head').append('<link rel="stylesheet" type="text/css" href="../static/css/style_mobile.css"/>');
     }
 
+    $( ".vinyl img" ).draggable({ revert: true });
+
     $('.circle1').click(function AnimateRotate(angle) {
         // caching the object for performance reasons
         var $elem = $('#vrotate');
@@ -65,6 +67,7 @@ $(document).ready(function () {
 
 
     $('.vinyl').on('swipeleft', function (e) {
+        console.log('dislike');
         data = {
             song_id: currentSongID,
             like: false
@@ -72,6 +75,7 @@ $(document).ready(function () {
         vote(data)
     });
     $('.vinyl').on('swiperight', function (e) {
+        console.log('like');
         data = {
             song_id: currentSongID,
             like: true
