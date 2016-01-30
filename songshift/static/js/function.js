@@ -13,18 +13,23 @@ $(document).ready(function () {
         $('head').append('<link rel="stylesheet" type="text/css" href="../static/css/style_mobile.css"/>');
     }
 
-    $( ".vinyl img" ).draggable({
+    $( ".vinyl" ).draggable({
         revert: true,
         stop: function( event, ui ) {
             SWIPE_THRESH = 200;
             if( ui.position['left'] > SWIPE_THRESH){
-                $(this).trigger('swiperight');
-                $(this).draggable('option', 'revert', false);
+                //$(this).trigger('swiperight');
             }
             if( ui.position['left'] < -SWIPE_THRESH){
-                $(this).trigger('swipeleft')
+                //$(this).trigger('swipeleft')
             }
         }
+    });
+
+    $( ".vinyl").on('mouseup', function() {
+        $(this).animate({
+                    opacity:0
+                }, 100);
     });
 
     $('.circle1').click(function AnimateRotate(angle) {
