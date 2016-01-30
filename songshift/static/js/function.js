@@ -47,4 +47,10 @@ $(document).ready(function() {
             }
         });
     });
+
+    $('.vinyl').on('swipe', function() {
+        $(this).hide();
+    })
+
+
 });
