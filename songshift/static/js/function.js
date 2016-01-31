@@ -87,18 +87,15 @@ $(document).ready(function () {
 
 
     $('#like').on('click', function () {
-        console.log("like");
         data = {
             song_id: currentSongID,
             like: true
         };
-        vote(data)
+        vote(data);
         //$(this).hide();
     });
 
     $('#dislike').on('click', function () {
-        console.log("dislike");
-        //$(this).hide();
         data = {
             song_id: currentSongID,
             like: false
@@ -201,7 +198,7 @@ $(document).ready(function () {
         $(".vinyl").draggable({
             revert: true,
             stop: function (event, ui) {
-                SWIPE_THRESH = 200;
+                SWIPE_THRESH = 250;
                 if (ui.position['left'] > SWIPE_THRESH) {
                     $('.vinyl img').trigger('swiperight');
                     //$(this).hide("slide", { direction: "right" }, 100);
