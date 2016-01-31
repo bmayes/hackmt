@@ -56,7 +56,7 @@ def getNewTrack(next_href='/tracks'):
     valid_track_types = 'original, remix'
     users_tags = "rock, electronic"
 
-    rand = random.randint(0, 100);
+    rand = random.randint(0, 100)
     if rand > suggestion_threshold:  # differs from user's likes
         tracks = client.get(next_href,
                             limit=SEARCH_AHEAD,
@@ -82,16 +82,15 @@ def getNewTrack(next_href='/tracks'):
                                 linked_partitioning=1)
             valid_tracks = []
             for track in tracks.collection:
-                 if validTrack(track):
-                     print track.title
-                     valid_tracks.append(track)
+                if validTrack(track):
+                    print track.title
+                    valid_tracks.append(track)
             if valid_tracks:
                 track = random.choice(valid_tracks)
                 need_track = False
 
         except Exception:
             pass
-
 
     if not track:
         getNewTrack()
@@ -100,7 +99,6 @@ def getNewTrack(next_href='/tracks'):
     #     getNewTrack()
 
     return track, tracks.next_href
-
 
 
 def validTrack(track):
@@ -115,7 +113,6 @@ def validTrack(track):
 
 @app.route('/newsong', methods=['GET'])
 def loadSong():
-
     track, next_href = getNewTrack(request.args['next_href'])
 
     # fetch track to stream
@@ -124,7 +121,7 @@ def loadSong():
     stream_url = client.get(track1.stream_url, allow_redirects=False)
 
     track_dict = {
-        "next_href" : next_href,
+        "next_href": next_href,
         "song_title": track.title,
         "artist": track.user['username'],
         "artwork_url": track.artwork_url,

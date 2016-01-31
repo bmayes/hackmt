@@ -1,3 +1,4 @@
+
 .iphone {
     position: fixed;
     font-family: 'Jura', sans-serif;
@@ -16,7 +17,7 @@ div {
     z-index: 2;
     top: 8.7em;
     left: 3.8em;
-    background: #ECE1C2;
+    background: #F9E5AD;
     /*background: url('../img/color.png');*/
 }
 
