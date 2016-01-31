@@ -105,7 +105,12 @@ $(document).ready(function () {
         data = JSON.parse(data);
         console.log(data);
         // update html from here
-        $('#songTitle').html(data.song_title);
+        var title = data.song_title;
+        if (data.song_title.length > 40) {
+            title = data.song_title.substr(0, 40) + '...';
+        }
+
+        $('#songTitle').html(title);
         $('#Artist').html(data.artist);
         $('.albumimg img').attr('src', data.artwork_url);
 
@@ -115,9 +120,21 @@ $(document).ready(function () {
 
         //play audio
         $('.controls').append('<audio id="audio"><source src="' + data.stream_url + '" type="audio/mp3"></audio>');
-         if ($('.playpause').hasClass('playing')) {
+        if ($('.playpause').hasClass('fa-pause')) {
             document.getElementById('audio').play();
-         }
+        }
+        var player = document.getElementById('audio');
+        player.ontimeupdate = function() {
+
+            var time = Math.floor(this.currentTime);
+            var totalTime = Math.floor(this.duration);
+
+            time = formatTime(time);
+            totalTime = formatTime(totalTime);
+
+            $('#tracktime').html(time + ' / ' + totalTime);
+        }
+
     }
 
     function vote(data) {
@@ -182,16 +199,22 @@ $(document).ready(function () {
 
     }
 
+    $(document).keyup(function (evt) {
+        if (evt.keyCode == 32) {
+            $('.playpause').click();
+        }
+    });
+
     $('.playpause').on('click', function () {
-        if ($(this).hasClass('playing')) {
+        if ($(this).hasClass('fa-pause')) {
             document.getElementById('audio').pause();
-            $(this).find('img').attr('src', "../static/img/triangle play.png");
-            $(this).toggleClass('playing');
+            $(this).toggleClass('fa-play');
+            $(this).toggleClass('fa-pause');
 
         } else {
             document.getElementById('audio').play();
-            $(this).find('img').attr('src', "../static/img/pause.png");
-            $(this).toggleClass('playing');
+            $(this).toggleClass('fa-play');
+            $(this).toggleClass('fa-pause');
         }
     });
 
@@ -202,4 +225,13 @@ $(document).ready(function () {
         $('#audio').remove();
     }
 
+    function formatTime(time) {
+        var sec = time % 60;
+        var min = (time-sec) / 60;
+
+        if (sec < 10){
+            sec = '0' + sec;
+        }
+        return min + ':' + sec;
+    }
 });
