@@ -1,7 +1,6 @@
 from songshift import db
 
 class Song(db.Model):
-
     __tablename__ = "songs"
     id = db.Column(db.Integer, primary_key=True)
     songid = db.Column(db.Integer)

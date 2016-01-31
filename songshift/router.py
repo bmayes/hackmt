@@ -164,7 +164,6 @@ def voteSong():
 
 
 def getTagList():
-
-
-
-    return "rock, electronic"
+    alphalist = session.query(Song)
+    alphalist.order_by(Song.songs.genre)
+    return alphalist
