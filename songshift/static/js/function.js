@@ -15,6 +15,25 @@ $(document).ready(function () {
         $('head').append('<link rel="stylesheet" type="text/css" href="../static/css/style_mobile.css"/>');
     }
 
+    function updateVinylPlayer(percent_done) {
+        var $elem = $('.rneedle');
+
+        var start_angle = -26;
+        var end_angle = 0;
+        var current = Math.round((end_angle - start_angle) * percent_done) + start_angle;
+
+        $elem.css({
+            transform: 'rotate(' + current + 'deg)'
+        });
+
+        var VINYL_SPEED = 40;
+        currentVinylAngle +=  VINYL_SPEED;
+
+        $('#vrotate').css({
+            transform: 'rotate(' + currentVinylAngle + 'deg)'
+        })
+    }
+
     $('.circle1').click(function AnimateRotate(angle) {
         // caching the object for performance reasons
         var $elem = $('#vrotate');
@@ -60,6 +79,7 @@ $(document).ready(function () {
         });
     });
 
+    var currentVinylAngle = 0;
     var currentNextHref;
     var currentSongID;
 
@@ -112,7 +132,7 @@ $(document).ready(function () {
 
         $('#songTitle').html(title);
         $('#Artist').html(data.artist);
-        if(data.artwork_url) {
+        if (data.artwork_url) {
             album_art = data.artwork_url;
         } else {
             album_art = '../static/img/default.png';
@@ -132,7 +152,9 @@ $(document).ready(function () {
             document.getElementById('audio').play();
         }
         var player = document.getElementById('audio');
-        player.ontimeupdate = function() {
+        player.ontimeupdate = function () {
+
+            updateVinylPlayer(this.currentTime / this.duration);
 
             var time = Math.floor(this.currentTime);
             var totalTime = Math.floor(this.duration);
@@ -175,6 +197,7 @@ $(document).ready(function () {
     }
 
     function setUpVinyl() {
+        currentVinylAngle = 0;
         $(".vinyl").draggable({
             revert: true,
             stop: function (event, ui) {
@@ -237,20 +260,20 @@ $(document).ready(function () {
 
     function formatTime(time) {
         var sec = time % 60;
-        var min = (time-sec) / 60;
+        var min = (time - sec) / 60;
 
-        if (sec < 10){
+        if (sec < 10) {
             sec = '0' + sec;
         }
         return min + ':' + sec;
     }
 
     function toggleLoader() {
-        if($('#cssload-loader').css('display') == 'none'){
+        if ($('#cssload-loader').css('display') == 'none') {
             $('#cssload-loader').css('display', 'block');
             $('.artist').css('display', 'none');
             $('.albumimg img').attr('src', '../static/img/default.png');
-        } else{
+        } else {
             $('#cssload-loader').css('display', 'none');
             $('.artist').css('display', 'block');
         }

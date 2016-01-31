@@ -333,6 +333,10 @@ div {
     transform: rotate(-26deg);
     transform-origin: 73% 25%;
     pointer-events: none;
+    -webkit-transition: all 1000ms ease-out;
+    -moz-transition: all 1000ms ease-out;
+    -o-transition: all 1000ms ease-out;
+    transition: all 1000ms ease-out;
 }
 
 .circle1 {
@@ -368,10 +372,15 @@ div {
 }
 
 #vrotate {
+    transform: rotate(0rad);
     transform-origin: center center;
     -webkit-animation: entire 1s infinite linear;
     -moz-animation: entire 1s infinite linear;
     animation: entire 1s infinite linear;
+    -webkit-transition: all 1000ms ease-out;
+    -moz-transition: all 1000ms ease-out;
+    -o-transition: all 1000ms ease-out;
+    transition: all 1000ms ease-out;
 }
 
 .choice {
