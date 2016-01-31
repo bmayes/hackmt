@@ -105,6 +105,8 @@ def validTrack(track):
     # tag_count = len(track.tag_list.split(' '))
     # if tag_count <= 1: return False
     # print tag_count
+    # if int(track.duration) > 6000 or int(track.duration) < 1000:
+    #     return False
     if int(track.playback_count) < 50 or track.streamable == 'false':
         return False
 
@@ -121,6 +123,7 @@ def loadSong():
     stream_url = client.get(track1.stream_url, allow_redirects=False)
 
     track_dict = {
+        "duration":track.duration,
         "next_href": next_href,
         "song_title": track.title,
         "artist": track.user['username'],

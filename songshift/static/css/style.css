@@ -54,7 +54,7 @@ div {
     width: 72%;
     margin-top: -3px;
     float: left;
-    color: #A36D8F;
+    color: #458ABB;
 }
 
 .user {
@@ -112,7 +112,7 @@ div {
     overflow: hidden;
     box-sizing: border-box;
     border-top-right-radius: 20px;
-    background-color: #A36D8F;
+    background-color: #90C1E4;
 }
 
 .cover {
@@ -158,6 +158,8 @@ div {
     width: 130px;
     height: 130px;
     box-shadow: -3px 5px 5px gray;
+    background: url('../img/default.png') no-repeat;
+    background-size: contain;
 }
 
 .albumimg {

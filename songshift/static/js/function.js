@@ -112,7 +112,13 @@ $(document).ready(function () {
 
         $('#songTitle').html(title);
         $('#Artist').html(data.artist);
-        $('.albumimg img').attr('src', data.artwork_url);
+        if(data.artwork_url) {
+            album_art = data.artwork_url;
+        } else {
+            album_art = '../static/img/default.png';
+        }
+
+        $('.albumimg img').attr('src', album_art);
 
         // also save song id
         currentSongID = data.song_id;
