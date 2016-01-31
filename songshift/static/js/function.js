@@ -112,12 +112,19 @@ $(document).ready(function () {
         // also save song id
         currentSongID = data.song_id;
         currentNextHref = data['next_href'];
+
+        //play audio
+        $('.controls').append('<audio id="audio"><source src="' + data.stream_url + '" type="audio/mp3"></audio>');
+         if ($('.playpause').hasClass('playing')) {
+            document.getElementById('audio').play();
+         }
     }
 
     function vote(data) {
         if (currentSongID == null) return;
 
         showNewVinyl();
+        stop();
 
         getNewSong(currentNextHref);
 
@@ -177,12 +184,22 @@ $(document).ready(function () {
 
     $('.playpause').on('click', function () {
         if ($(this).hasClass('playing')) {
+            document.getElementById('audio').pause();
             $(this).find('img').attr('src', "../static/img/triangle play.png");
             $(this).toggleClass('playing');
+
         } else {
+            document.getElementById('audio').play();
             $(this).find('img').attr('src', "../static/img/pause.png");
             $(this).toggleClass('playing');
         }
-    })
+    });
+
+    function stop() {
+        var audioPlayer = document.getElementsByTagName('audio')[0];
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0;
+        $('#audio').remove();
+    }
 
 });
