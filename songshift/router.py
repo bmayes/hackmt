@@ -170,6 +170,7 @@ def getTagList():
     alphalist = Song.query.order_by(Song.genre).all()
 
     genre_count = 3
+    SUGGESTION_THRESHOLD = 80
     scores = {}
 
     for tag in alphalist:
@@ -186,8 +187,12 @@ def getTagList():
             # score[1] = math.floor(math.log(score[1], 3))
             total_points += score[1]
 
-    genre_list = []
+    genre_list = ""
     while len(genre_list) <= genre_count:
+        rand_suggestions = random.randint(0,100)
+        if rand_suggestions >= SUGGESTION_THRESHOLD:
+            continue
+
         rand_index = random.randint(0, total_points)
         for score in sorted_scores:
             rand_index -= score[1]
@@ -195,6 +200,6 @@ def getTagList():
                 genre = score[0]
                 break
         if not genre in genre_list:
-            genre_list.append(genre)
+            genre_list += genre + ', '
 
     return genre_list

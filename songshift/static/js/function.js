@@ -167,6 +167,9 @@ $(document).ready(function () {
     function vote(data) {
         if (currentSongID == null) return;
 
+        if (data.like) console.log('like');
+        else console.log('dislike');
+
         showNewVinyl();
         stop();
         toggleLoader();
@@ -210,7 +213,6 @@ $(document).ready(function () {
             }
         });
         $('.vinyl img').on('swipeleft', function (e) {
-            console.log('dislike');
             data = {
                 song_id: currentSongID,
                 like: false
@@ -218,7 +220,6 @@ $(document).ready(function () {
             vote(data)
         });
         $('.vinyl img').on('swiperight', function (e) {
-            console.log('like');
             data = {
                 song_id: currentSongID,
                 like: true
