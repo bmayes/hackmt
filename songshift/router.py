@@ -164,6 +164,9 @@ def voteSong():
 
 
 def getTagList():
-    alphalist = session.query(Song)
-    alphalist.order_by(Song.songs.genre)
+    alphalist = db.session.query(Song)
+    # alphalist.order_by(Song.genre)
+    print '\n'
+    print alphalist
+    print '\n'
     return alphalist

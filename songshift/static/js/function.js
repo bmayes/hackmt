@@ -124,6 +124,8 @@ $(document).ready(function () {
         currentSongID = data.song_id;
         currentNextHref = data['next_href'];
 
+        toggleLoader();
+
         //play audio
         $('.controls').append('<audio id="audio"><source src="' + data.stream_url + '" type="audio/mp3"></audio>');
         if ($('.playpause').hasClass('fa-pause')) {
@@ -148,6 +150,7 @@ $(document).ready(function () {
 
         showNewVinyl();
         stop();
+        toggleLoader();
 
         getNewSong(currentNextHref);
 
@@ -239,5 +242,17 @@ $(document).ready(function () {
             sec = '0' + sec;
         }
         return min + ':' + sec;
+    }
+
+    function toggleLoader() {
+        if($('#cssload-loader').css('display') == 'none'){
+            $('#cssload-loader').css('display', 'block');
+            $('.artist').css('display', 'none');
+            $('.albumimg img').attr('src', '../static/img/default.png');
+        } else{
+            $('#cssload-loader').css('display', 'none');
+            $('.artist').css('display', 'block');
+        }
+
     }
 });

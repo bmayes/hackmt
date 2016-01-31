@@ -1,4 +1,198 @@
 
+#cssload-loader {
+	position: absolute;
+	margin: auto;
+	bottom: 0;
+	right: 0;
+	width: 158px;
+}
+#cssload-loader ul {
+	margin: 0;
+	list-style: none;
+	width: 158px;
+	height: 114px;
+	position: relative;
+	padding: 0;
+	height: 18px;
+}
+#cssload-loader ul li {
+	position: absolute;
+	width: 4px;
+	height: 0;
+	background-color: rgb(0,0,0);
+	bottom: 0;
+}
+
+
+#cssload-loader li:nth-child(1) {
+	left: 0;
+	animation: cssload-sequence1 0.9s ease infinite 0;
+		-o-animation: cssload-sequence1 0.9s ease infinite 0;
+		-ms-animation: cssload-sequence1 0.9s ease infinite 0;
+		-webkit-animation: cssload-sequence1 0.9s ease infinite 0;
+		-moz-animation: cssload-sequence1 0.9s ease infinite 0;
+}
+#cssload-loader li:nth-child(2) {
+	left: 26px;
+	animation: cssload-sequence2 0.9s ease infinite 0.085s;
+		-o-animation: cssload-sequence2 0.9s ease infinite 0.085s;
+		-ms-animation: cssload-sequence2 0.9s ease infinite 0.085s;
+		-webkit-animation: cssload-sequence2 0.9s ease infinite 0.085s;
+		-moz-animation: cssload-sequence2 0.9s ease infinite 0.085s;
+}
+#cssload-loader li:nth-child(3) {
+	left: 53px;
+	animation: cssload-sequence1 0.9s ease-in-out infinite 0.18s;
+		-o-animation: cssload-sequence1 0.9s ease-in-out infinite 0.18s;
+		-ms-animation: cssload-sequence1 0.9s ease-in-out infinite 0.18s;
+		-webkit-animation: cssload-sequence1 0.9s ease-in-out infinite 0.18s;
+		-moz-animation: cssload-sequence1 0.9s ease-in-out infinite 0.18s;
+}
+#cssload-loader li:nth-child(4) {
+	left: 79px;
+	animation: cssload-sequence2 0.9s ease-in infinite 0.265s;
+		-o-animation: cssload-sequence2 0.9s ease-in infinite 0.265s;
+		-ms-animation: cssload-sequence2 0.9s ease-in infinite 0.265s;
+		-webkit-animation: cssload-sequence2 0.9s ease-in infinite 0.265s;
+		-moz-animation: cssload-sequence2 0.9s ease-in infinite 0.265s;
+}
+#cssload-loader li:nth-child(5) {
+	left: 105px;
+	animation: cssload-sequence1 0.9s ease-in-out infinite 0.36s;
+		-o-animation: cssload-sequence1 0.9s ease-in-out infinite 0.36s;
+		-ms-animation: cssload-sequence1 0.9s ease-in-out infinite 0.36s;
+		-webkit-animation: cssload-sequence1 0.9s ease-in-out infinite 0.36s;
+		-moz-animation: cssload-sequence1 0.9s ease-in-out infinite 0.36s;
+}
+#cssload-loader li:nth-child(6) {
+	left: 131px;
+	animation: cssload-sequence2 0.9s ease infinite 0.445s;
+		-o-animation: cssload-sequence2 0.9s ease infinite 0.445s;
+		-ms-animation: cssload-sequence2 0.9s ease infinite 0.445s;
+		-webkit-animation: cssload-sequence2 0.9s ease infinite 0.445s;
+		-moz-animation: cssload-sequence2 0.9s ease infinite 0.445s;
+}
+
+
+@keyframes cssload-sequence1 {
+	0% {
+		height: 18px;
+	}
+	50% {
+		height: 88px;
+	}
+	100% {
+		height: 18px;
+	}
+}
+
+@-o-keyframes cssload-sequence1 {
+	0% {
+		height: 18px;
+	}
+	50% {
+		height: 88px;
+	}
+	100% {
+		height: 18px;
+	}
+}
+
+@-ms-keyframes cssload-sequence1 {
+	0% {
+		height: 18px;
+	}
+	50% {
+		height: 88px;
+	}
+	100% {
+		height: 18px;
+	}
+}
+
+@-webkit-keyframes cssload-sequence1 {
+	0% {
+		height: 18px;
+	}
+	50% {
+		height: 88px;
+	}
+	100% {
+		height: 18px;
+	}
+}
+
+@-moz-keyframes cssload-sequence1 {
+	0% {
+		height: 18px;
+	}
+	50% {
+		height: 88px;
+	}
+	100% {
+		height: 18px;
+	}
+}
+
+@keyframes cssload-sequence2 {
+	0% {
+		height: 35px;
+	}
+	50% {
+		height: 114px;
+	}
+	100% {
+		height: 35px;
+	}
+}
+
+@-o-keyframes cssload-sequence2 {
+	0% {
+		height: 35px;
+	}
+	50% {
+		height: 114px;
+	}
+	100% {
+		height: 35px;
+	}
+}
+
+@-ms-keyframes cssload-sequence2 {
+	0% {
+		height: 35px;
+	}
+	50% {
+		height: 114px;
+	}
+	100% {
+		height: 35px;
+	}
+}
+
+@-webkit-keyframes cssload-sequence2 {
+	0% {
+		height: 35px;
+	}
+	50% {
+		height: 114px;
+	}
+	100% {
+		height: 35px;
+	}
+}
+
+@-moz-keyframes cssload-sequence2 {
+	0% {
+		height: 35px;
+	}
+	50% {
+		height: 114px;
+	}
+	100% {
+		height: 35px;
+	}
+}
 .iphone {
     position: fixed;
     font-family: 'Jura', sans-serif;
@@ -168,7 +362,7 @@ div {
 }
 
 .artist {
-    max-width: 50%;
+    width: 50%;
     float: right;
     font-size: 1.2em;
 }
