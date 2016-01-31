@@ -26,7 +26,7 @@ $(document).ready(function () {
             transform: 'rotate(' + current + 'deg)'
         });
 
-        var VINYL_SPEED = 40;
+        var VINYL_SPEED = 80;
         currentVinylAngle +=  VINYL_SPEED;
 
         $('#vrotate').css({
