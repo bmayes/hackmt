@@ -1,6 +1,9 @@
 import os
 from flask import render_template, send_from_directory, redirect, url_for, flash, session, g, jsonify, request, abort
 from functools import wraps
+
+from requests import models
+
 from songshift import app, db, theLoginMgr
 
 from songshift.models.songs import Song
@@ -13,6 +16,8 @@ import json
 from models.songs import Song
 from datetime import date
 import re
+import operator
+import math
 
 # @theLoginMgr.user_loader
 # def load_user(userid):
@@ -76,7 +81,6 @@ def getNewTrack(next_href='/tracks'):
             valid_tracks = []
             for track in tracks.collection:
                 if validTrack(track):
-                    print track.title
                     valid_tracks.append(track)
             if valid_tracks:
                 track = random.choice(valid_tracks)
@@ -97,7 +101,6 @@ def getNewTrack(next_href='/tracks'):
 def validTrack(track):
     # tag_count = len(track.tag_list.split(' '))
     # if tag_count <= 1: return False
-    # print tag_count
     # if int(track.duration) > 6000 or int(track.duration) < 1000:
     #     return False
     if int(track.playback_count) < 50 or track.streamable == 'false':
@@ -116,7 +119,7 @@ def loadSong():
     stream_url = client.get(track1.stream_url, allow_redirects=False)
 
     track_dict = {
-        "duration": track.duration,
+        "tags": track.tag_list,
         "next_href": next_href,
         "song_title": track.title,
         "artist": track.user['username'],
@@ -164,9 +167,34 @@ def voteSong():
 
 
 def getTagList():
-    alphalist = db.session.query(Song)
-    # alphalist.order_by(Song.genre)
-    print '\n'
-    print alphalist
-    print '\n'
-    return alphalist
+    alphalist = Song.query.order_by(Song.genre).all()
+
+    genre_count = 3
+    scores = {}
+
+    for tag in alphalist:
+        if not tag.genre in scores:
+            scores[tag.genre] = tag.affinity
+        else:
+            scores[tag.genre] += tag.affinity
+
+    sorted_scores = sorted(scores.items(), key=operator.itemgetter(1), reverse=True)
+    total_points = 0
+    for score in sorted_scores:
+        print score
+        if score[1] > 0:
+            # score[1] = math.floor(math.log(score[1], 3))
+            total_points += score[1]
+
+    genre_list = []
+    while len(genre_list) <= genre_count:
+        rand_index = random.randint(0, total_points)
+        for score in sorted_scores:
+            rand_index -= score[1]
+            if rand_index <= 0:
+                genre = score[0]
+                break
+        if not genre in genre_list:
+            genre_list.append(genre)
+
+    return genre_list

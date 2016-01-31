@@ -215,13 +215,14 @@ $(document).ready(function () {
     });
 
     $('.playpause').on('click', function () {
+        var player = document.getElementById('audio');
         if ($(this).hasClass('fa-pause')) {
-            document.getElementById('audio').pause();
+            if (player) player.pause();
             $(this).toggleClass('fa-play');
             $(this).toggleClass('fa-pause');
 
         } else {
-            document.getElementById('audio').play();
+            if (player) player.play();
             $(this).toggleClass('fa-play');
             $(this).toggleClass('fa-pause');
         }
