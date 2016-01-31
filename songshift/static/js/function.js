@@ -160,7 +160,7 @@ $(document).ready(function () {
 
     function showNewVinyl() {
         $('.vinyl img').remove();
-        var rand = Math.floor((Math.random() * 3) + 1);
+        var rand = Math.floor((Math.random() * 7) + 1);
         $('.vinyl').append('<img src="../static/img/vinyl' + rand + '.png" id="vrotate" />');
         setUpVinyl();
     }
