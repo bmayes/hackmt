@@ -53,7 +53,7 @@ def getNewTrack(next_href='/tracks'):
     SEARCH_AHEAD = 100  # num of items to preload
     suggestion_threshold = 60  # percent of loads that are liked genres
 
-    valid_track_types = 'original, remix, recording, live'
+    valid_track_types = 'original, remix'
     users_tags = "rock, electronic"
 
     rand = random.randint(0, 100);
@@ -117,13 +117,19 @@ def validTrack(track):
 def loadSong():
 
     track, next_href = getNewTrack(request.args['next_href'])
+
+    # fetch track to stream
+    track1 = client.get('/tracks/%d' % track.id)
+    # get the tracks streaming URL
+    stream_url = client.get(track1.stream_url, allow_redirects=False)
+
     track_dict = {
         "next_href" : next_href,
         "song_title": track.title,
         "artist": track.user['username'],
         "artwork_url": track.artwork_url,
         "song_id": track.id,
-        "stream_url": track.stream_url,
+        "stream_url": stream_url.location,
         "play_count": track.playback_count
     }
 
