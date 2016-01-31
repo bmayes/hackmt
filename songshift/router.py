@@ -12,6 +12,7 @@ import random
 import json
 from models.songs import Song
 from datetime import date
+import re
 
 # @theLoginMgr.user_loader
 # def load_user(userid):
@@ -54,22 +55,14 @@ def getNewTrack(next_href='/tracks'):
     suggestion_threshold = 60  # percent of loads that are liked genres
 
     valid_track_types = 'original, remix'
-    users_tags = "rock, electronic"
+    users_tags = getTagList()
 
-    rand = random.randint(0, 100)
-    if rand > suggestion_threshold:  # differs from user's likes
-        tracks = client.get(next_href,
-                            limit=SEARCH_AHEAD,
-                            order='created_at',
-                            types=valid_track_types,
-                            linked_partitioning=1)
-    else:
-        tracks = client.get(next_href,
-                            limit=SEARCH_AHEAD,
-                            order='created_at',
-                            types=valid_track_types,
-                            genre=users_tags,
-                            linked_partitioning=1)
+    tracks = client.get(next_href,
+                        limit=SEARCH_AHEAD,
+                        order='created_at',
+                        types=valid_track_types,
+                        tag_list=users_tags,
+                        linked_partitioning=1)
 
     need_track = True
     while need_track:
@@ -123,7 +116,7 @@ def loadSong():
     stream_url = client.get(track1.stream_url, allow_redirects=False)
 
     track_dict = {
-        "duration":track.duration,
+        "duration": track.duration,
         "next_href": next_href,
         "song_title": track.title,
         "artist": track.user['username'],
@@ -149,7 +142,15 @@ def voteSong():
     song_id = int(request.args['song_id'])
     tracks = client.get('/tracks/%d' % song_id)
 
+    excludes = ['soundcloud']
+
     for tag in tracks.tag_list.split(' '):
+        tag = re.sub('[^A-Za-z]+', '', tag)
+        if not tag or tag == '': break
+        if tag in excludes:
+            break
+        tag = tag.lower()
+
         song = Song(
             songid=song_id,
             genre=tag.strip(),
@@ -161,6 +162,9 @@ def voteSong():
 
     return ""
 
-# @app.route('/songpage', methods=['GET'])
-# def fetchSongPage():
-#     song_id = request.form['song_id']
+
+def getTagList():
+
+
+
+    return "rock, electronic"

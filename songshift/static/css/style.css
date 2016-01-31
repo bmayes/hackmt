@@ -168,7 +168,7 @@ div {
 }
 
 .artist {
-    width: 140px;
+    max-width: 50%;
     float: right;
     font-size: 1.2em;
 }
