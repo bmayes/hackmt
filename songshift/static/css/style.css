@@ -100,3 +100,14 @@ div {
 .ui-loader {
     display: none;
 }
+.playpause img {
+    max-width: 45px;
+}
+
+.playpause {
+    max-width: 45px;
+    position: absolute;
+    top: 280px;
+    left: 134px;
+    z-index: 2;
+}

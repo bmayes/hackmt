@@ -103,6 +103,7 @@ $(document).ready(function () {
         vote(data)
     });
 
+
     function getNewSong(next_href) {
         $.ajax({
             type: "GET",
@@ -153,13 +154,14 @@ $(document).ready(function () {
 
     function showNewVinyl() {
         $('.vinyl img').remove();
-        if( $('.vinyl').draggable('instance')){
+        if ($('.vinyl').draggable('instance')) {
             $('.vinyl').draggable('destroy');
         }
         var rand = Math.floor((Math.random() * 3) + 1);
         $('.vinyl').append('<img src="../static/img/vinyl' + rand + '.png" id="vrotate" />');
         setUpVinyl();
     }
+
     function setUpVinyl() {
         $(".vinyl").draggable({
             revert: true,
@@ -177,14 +179,15 @@ $(document).ready(function () {
         });
     }
 
-    $('.playpause').on('click', function() {
-        if($(this).hasClass('playing')){
+    $('.playpause').on('click', function () {
+        if ($(this).hasClass('playing')) {
             $(this).find('img').attr('src', "../static/img/triangle play.png");
             $(this).toggleClass('playing');
         } else {
-             $(this).find('img').attr('src', "../static/img/pause.png");
+            $(this).find('img').attr('src', "../static/img/pause.png");
             $(this).toggleClass('playing');
         }
-    })
+    });
 
 });
+
