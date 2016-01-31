@@ -242,10 +242,12 @@ div {
 }
 
 #tracktime {
-    display: block;
+    display: inline-block;
     position: relative;
-    left: 75px;
+    left: -10px;
     right: 0;
-    top: 30px;
+    top: 65px;
     font-size: 18px;
+    text-align: center;
+    max-height: 22px;
 }

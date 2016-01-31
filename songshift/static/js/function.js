@@ -123,6 +123,18 @@ $(document).ready(function () {
         if ($('.playpause').hasClass('fa-pause')) {
             document.getElementById('audio').play();
         }
+        var player = document.getElementById('audio');
+        player.ontimeupdate = function() {
+
+            var time = Math.floor(this.currentTime);
+            var totalTime = Math.floor(this.duration);
+
+            time = formatTime(time);
+            totalTime = formatTime(totalTime);
+
+            $('#tracktime').html(time + ' / ' + totalTime);
+        }
+
     }
 
     function vote(data) {
@@ -213,4 +225,13 @@ $(document).ready(function () {
         $('#audio').remove();
     }
 
+    function formatTime(time) {
+        var sec = time % 60;
+        var min = (time-sec) / 60;
+
+        if (sec < 10){
+            sec = '0' + sec;
+        }
+        return min + ':' + sec;
+    }
 });
