@@ -61,6 +61,7 @@ div {
 }
 .needle img {
     position: absolute; z-index: 20; width:175px; height: 210px; top:-1.7em; left: 9.2em; transform: rotate(-40deg); transform-origin: 73% 25%;
+    pointer-events: none;
 }
 .circle1 {
     position: absolute; z-index: 21; width:13px; height: 13px; top:4.4em; left: 19.3em; border-radius: 8px; border: 2px solid black; background-color: #FCFAFF; cursor: pointer;
@@ -79,6 +80,11 @@ div {
     -webkit-animation: entire 1s infinite linear;
     -moz-animation: entire 1s infinite linear;
     animation: entire 1s infinite linear;
+    pointer-events: none;
+    height: 280px;
+    border: none;
+    background: url("../img/vinyl1.png") no-repeat;
+    background-size: contain;
 }
 .choice {
     width: 200px; margin: 15px auto; padding-left: 10px;
